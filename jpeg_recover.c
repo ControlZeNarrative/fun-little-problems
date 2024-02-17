@@ -31,7 +31,7 @@ int main(int argc, char* argv[])
     int jpeg  =  0;
     
     //string to hold a filename
-    char filename[8]  = {0};
+    char filename[8];
          
     //read memory card untill the end of file
     while(fread(buffer, sizeof(BYTE)*512, 1, infile) == 1)
@@ -44,9 +44,8 @@ int main(int argc, char* argv[])
             {
                 fclose(outfile); 
             }
-                sprintf(filename, "%03d.jpg", jpeg++);
-                //open a new outfile to write into
-                outfile = fopen(filename, "w");
+            sprintf(filename, "%03d.jpg", jpeg++);
+            outfile = fopen(filename, "w");
         }
        
        //Continue writing to same file if new jpeg is not found    
@@ -56,12 +55,12 @@ int main(int argc, char* argv[])
        }
     }
   
-    // close last opened outfile
+    // close output file
     if (outfile !=  NULL)
     {
-    fclose(outfile);
+        fclose(outfile);
     }
-    //close input file (forensic image)
+    //close input file
     fclose(infile);
     return 0;   
 }
